@@ -15,7 +15,7 @@ This app provides a UI to the Bayesian Discharge Rating Curves (BDRC) package (H
 
 ## Usage:
 
-The app is hosted on [shinyapps.io](https://bnei.shinyapps.io/) with a free account. Please be mindful of this and close the app/browser tab as soon as possible when you are done to conserve limited computational time.
+The app is hosted on [shinyapps.io](https://bnei.shinyapps.io/bdrc_fitter/) with a free account. Please be mindful of this and close the app/browser tab as soon as possible when you are done to conserve limited computational time.
 
 The app is currently in an Early Alpha stage, and has <strong>bare minimum functionality.</strong>
 <br/>
