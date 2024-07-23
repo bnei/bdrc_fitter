@@ -2,6 +2,7 @@ library(shiny)
 library(shinythemes)
 library(tidyverse)
 library(bdrc)
+library(bslib)
 
 ui <- fluidPage(
   
@@ -17,22 +18,26 @@ ui <- fluidPage(
       tabPanel("Read Me", htmlOutput("README")),
       
       tabPanel("Curve Fitter",
-               br(),
-
-               fluidRow(
-               fileInput("points_upload", "Upload Stage-Discharge Points:", 
-                         accept = ".csv"),
-               uiOutput("formula")),
-               br(),
-               fluidRow(
-                 actionButton("triggerFit", "Fit Curve (CLICK ONCE AND WAIT)", 
-                              class = "btn btn-primary")),
-               fluidRow(
-                 column(width = 3, tableOutput("rc_table")),
-                 column(width = 7, plotOutput("rating_curve"))),
-               
-               fluidRow(
-                 tableOutput("parameter_table"))
+               sidebarLayout(
+                 
+                 sidebarPanel(width = 3, 
+                              fileInput("points_upload", 
+                                        "Upload Stage-Discharge Points:", 
+                                        accept = ".csv"),
+                              
+                              actionButton("triggerFit", 
+                                           "Fit Curve (CLICK ONCE AND WAIT)", 
+                                           class = "btn btn-primary"),
+                              
+                              tableOutput("rc_table"),
+                              ),
+                 
+                 mainPanel(
+                   uiOutput("formula"),
+                   br(),
+                   plotOutput("rating_curve"),
+                   br(),
+                   tableOutput("parameter_table")))
       )
     )
   )

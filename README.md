@@ -33,6 +33,6 @@ limitations under the License.
 <br/>
 
 ## Contributing
-Note that this project is only provided in the event it is useful to others. Accordingly, it is not necessarily under active development. 
+Pull Requests are welcome. Note that this project is only provided in the event it is useful to others. Accordingly, it is not necessarily under active development. 
 <br/>
 <br/>

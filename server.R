@@ -64,7 +64,9 @@ server <- function(input, output) {
   output$rating_curve <- renderPlot(
     ggplot() +
       geom_point(data = rc_points(), aes(Q, H)) +
-      geom_line(data = curve_plot(), aes(median, h)))
+      geom_line(data = curve_plot(), aes(median, h)) +
+      geom_line(data = curve_plot(), aes(upper, h), linetype = "dotted") +
+      geom_line(data = curve_plot(), aes(lower, h), linetype = "dotted"))
   
   output$parameter_table <- renderTable(
     output_params()
