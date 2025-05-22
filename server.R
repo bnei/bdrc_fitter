@@ -4,19 +4,17 @@ library(tidyverse)
 library(bdrc)
 
 server <- function(input, output) {
-  
+
   output$README <- renderUI({
-    if(file.exists("../README.md")) {
-       includeMarkdown("../README.md")
-    } 
-    else {
-      # when deployed, README is copied to the same deployment folder
+    if (file.exists("../README.md")) {
+      includeMarkdown("../README.md")
+    } else {
       includeMarkdown("./README.md")
     }
   })
 
   output$formula <- renderUI({
-    withMathJax("$$Q = a(H-c)^b$$")
+    withMathJax("$$Q = C(H-h_0)^b$$")
   })
 
   rc_points <- reactive({
@@ -28,16 +26,16 @@ server <- function(input, output) {
     head(rc_points(), 10)
   )
 
-  curve.fit <- eventReactive(input$triggerFit, {
+  curve_fit <- eventReactive(input$triggerFit, {
     plm(Q ~ H, rc_points())
   })
 
   curve_plot <- reactive({
-    curve.fit()$rating_curve
+    curve_fit()$rating_curve
   })
 
   parameters <- reactive({
-    fitted_rc <- curve.fit()
+    fitted_rc <- curve_fit()
 
     list(
       a = fitted_rc$param_summary$median[[1]],
@@ -55,9 +53,9 @@ server <- function(input, output) {
 
     tribble(
       ~Parameter, ~Value,
-      "a", a,
-      "b", b,
-      "c", c
+      "C",   a,
+      "h_0", b,
+      "b",   c
     )
   })
 
@@ -66,7 +64,8 @@ server <- function(input, output) {
       geom_point(data = rc_points(), aes(Q, H)) +
       geom_line(data = curve_plot(), aes(median, h)) +
       geom_line(data = curve_plot(), aes(upper, h), linetype = "dotted") +
-      geom_line(data = curve_plot(), aes(lower, h), linetype = "dotted"))
+      geom_line(data = curve_plot(), aes(lower, h), linetype = "dotted")
+  )
 
   output$parameter_table <- renderTable(
     output_params()

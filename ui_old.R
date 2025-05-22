@@ -9,7 +9,7 @@ ui <- fluidPage(
   theme = shinytheme("yeti"),
   tags$head(HTML("<title>Bayesian Discharge Rating Curve Fitter</title>")),
 
-  titlePanel("One-Part Rating Curve Fitter"),
+  titlePanel("Simple Rating Curve Fitter"),
 
   mainPanel(
 
@@ -30,14 +30,15 @@ ui <- fluidPage(
                          "Fit Curve",
                          class = "btn btn-primary"),
             p("Click button once and wait."),
+            tableOutput("rc_table"),
+          ),
+          # Main panel for displaying results
+          mainPanel(
             uiOutput("formula"),
             br(),
+            plotOutput("rating_curve"),
             br(),
             tableOutput("parameter_table")
-          ),
-          # Main panel for displaying plot
-          mainPanel(
-            plotOutput("rating_curve")
           )
         )
       )
