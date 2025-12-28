@@ -25,6 +25,13 @@ ui <- fluidPage(
                                         "Upload Stage-Discharge Points:", 
                                         accept = ".csv"),
                               
+                              numericInput("num_breakpoints",
+                                          "Number of Breakpoints:",
+                                          value = 0,
+                                          min = 0,
+                                          max = 10,
+                                          step = 1),
+                              
                               actionButton("triggerFit", 
                                            "Fit Curve (CLICK ONCE AND WAIT)", 
                                            class = "btn btn-primary"),
@@ -42,3 +49,4 @@ ui <- fluidPage(
     )
   )
 )
+
